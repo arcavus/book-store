@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "b534a946-a7b5-4f41-9e01-ff73a1c94f55",
+		"name": "Book Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "1. Create Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"{{$randomFullName}}\",\n    \"description\": \"{{$randomWords}}\",\n    \"price\": {{$randomPrice}},\n    \"author\": \"{{$randomFirstName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{book}}",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{book}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{book}}",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{book}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "1. Register Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"fat\",\n    \"surname\": \"yur\",\n    \"username\": \"fat\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{customer}}/register",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{customer}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{customer}}/",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{customer}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"fat\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{customer}}/login",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{customer}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "1. Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"bookId\": \"60ec1ea1e6d06448bb4bd18a\",\n        \"quantity\": 1\n    },\n    {\n        \"bookId\": \"60ec1e87e6d06448bb4bd188\",\n        \"quantity\": 1\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Get Order by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}/60ec1f38edbaea7800e9970f",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}"
+							],
+							"path": [
+								"60ec1f38edbaea7800e9970f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Filter by date range",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}/filter?from=2021-01-01&to=2021-09-09",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{order}}"
+							],
+							"path": [
+								"filter"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "to",
+									"value": "2021-09-09"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistic",
+			"item": [
+				{
+					"name": "1. Get Monthly Statistic",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{statistic}}",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{statistic}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "1. Get All Stocks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{stock}}",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{stock}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Get Stock Of Book",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{stock}}/book/60ec1e87e6d06448bb4bd188",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{stock}}"
+							],
+							"path": [
+								"book",
+								"60ec1e87e6d06448bb4bd188"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Update Book Of Stock",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmYXQiLCJpZCI6IjYwZWFjNjc1Mzg5YzkwMmQzOWI5ZGVkMiJ9.kpu7PBui1soS8dBSJuxsM93bj4hOTtMClFa10BXu1ScLAJ8zoNhRDfSsxycsOJTl_fRJzSM4v6SkYiLxXGv4gg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{stock}}/book/60ec1ea1e6d06448bb4bd18a",
+							"host": [
+								"{{protocol}}{{host}}{{port}}{{prefix}}{{version}}{{stock}}"
+							],
+							"path": [
+								"book",
+								"60ec1ea1e6d06448bb4bd18a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
