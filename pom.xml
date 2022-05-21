@@ -90,9 +90,7 @@
     </build>
 
     <modules>
-        <module>rest-api</module>
-        <module>domain</module>
-        <module>persistence</module>
+        <module>book-store-rest</module>
     </modules>
 
 </project>
