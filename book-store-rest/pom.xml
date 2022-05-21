@@ -9,18 +9,17 @@
     </parent>
 
 
-    <artifactId>rest-api</artifactId>
+    <artifactId>book-store-rest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rest-api</name>
+    <name>book-store-rest</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>11</java.version>
         <swagger.version>2.9.2</swagger.version>
         <jwt.version>0.9.1</jwt.version>
-        <domain.version>0.0.1-SNAPSHOT</domain.version>
         <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
-        <start-class>com.bookstore.restapi.RestApiApplication</start-class>
+        <start-class>com.bookstore.BookSellApiApplication</start-class>
 
     </properties>
 
