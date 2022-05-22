@@ -4,18 +4,25 @@ import com.bookstore.adapter.impl.StatisticAdapterImpl;
 import com.bookstore.domain.StatisticDomain;
 import com.bookstore.repository.OrderRepository;
 import com.bookstore.utils.Utils;
+import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 
+import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 import static org.springframework.data.mongodb.core.aggregation.DateOperators.Month.month;
@@ -34,18 +41,12 @@ public class StatisticAdapterTest {
 
     @Test
     public void groupMonthlyByCustomerIdTest(){
-       /*Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.project().and(month("$date")).as("month"),
-                Aggregation.group("$month").count().as("count"),
-                project("count").and("month").previousOperation(),
-                Aggregation.match(where("month").is(2)));
-
-        AggregationResults<StatisticDomain> aggregate = mongoTemplate.aggregate(aggregation, "demo", StatisticDomain.class);
-
-        aggregate.getMappedResults().add(Utils.createStaisticDomain())
-        when(repository.groupMonthlyByCustomerId("2")).thenReturn(aggregate);
+        ArgumentCaptor<TypedAggregation> aggregationParamCaptor = ArgumentCaptor.forClass(TypedAggregation.class);
+        AggregationResults resultMock = mock(AggregationResults.class);
+        when(resultMock.getMappedResults()).thenReturn(Lists.newArrayList(Utils.createStaisticDomain()));
+        when(repository.groupMonthlyByCustomerId("2")).thenReturn(resultMock);
         List<StatisticDomain> statisticDomains = statisticAdapter.groupMonthlyByCustomerId("2");
-        Assert.assertNotNull(statisticDomains);*/
+        Assert.assertEquals(1, statisticDomains.size());
     }
 
 }
