@@ -41,7 +41,7 @@ public class BookServiceTest {
 
 
     @Test
-    public void createBook_shouldBeSuccess() {
+    public void createBookTest() {
         BookDto bookDto = Utils.createBookDto();
         when(mapper.toDomainObject(any(BookDto.class))).thenReturn(Utils.createBookDomain());
         when(bookAdapter.saveBook(any(BookDomain.class))).thenReturn(Utils.createBookDomain());
@@ -51,7 +51,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void getAllBook_serviceSuccess() {
+    public void getAllBookTest() {
         when(bookAdapter.getAllBook()).thenReturn(Lists.newArrayList(Utils.createBookDomain()));
         when(mapper.toDTO(any(BookDomain.class))).thenReturn(Utils.createBookDto());
         List<BookDto> result = bookService.getAllBook().getData();

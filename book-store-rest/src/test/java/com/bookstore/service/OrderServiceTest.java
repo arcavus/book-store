@@ -57,7 +57,7 @@ public class OrderServiceTest {
 
 
     @Test
-    public void createNewOrder_shouldBeSuccess() {
+    public void createOrderTest() {
         when(bookAdapter.getBookById("1")).thenReturn(Optional.of(Utils.createBookDomain()));
         when(stockAdapter.getStockOfBook("1")).thenReturn(Optional.of(Utils.createStockDomain()));
         when(adapter.saveOrder(any(OrderDomain.class))).thenReturn(Utils.createOrderDomain());
@@ -67,7 +67,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void getOrderById_shouldBeSuccess(){
+    public void getOrdersByIdTest(){
         when(adapter.getOrdersById("2")).thenReturn(Optional.of(Utils.createOrderDomain()));
         when(mapper.toDTO(any(OrderDomain.class))).thenReturn(Utils.createOrderDto());
         OrderDto data = orderDetailService.getOrdersById("2").getData();
@@ -75,7 +75,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void getCustomerById_shouldBeSuccess(){
+    public void getOrdersByCustomerIdTest(){
         when(adapter.getOrdersByCustomerId("2")).thenReturn(Lists.newArrayList(Utils.createOrderDomain()));
         List<OrderDto> data = orderDetailService.getOrdersByCustomerId("2").getData();
         Assert.assertNotNull(data);

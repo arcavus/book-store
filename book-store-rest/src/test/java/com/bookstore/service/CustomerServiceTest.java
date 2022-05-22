@@ -42,7 +42,7 @@ public class CustomerServiceTest {
 
 
     @Test
-    public void createCustomer_shouldBeSuccess() {
+    public void registerCustomerTest() {
         CustomerEntity customer = Utils.createCustomer();
 
         CustomerRegisterDto customerRegisterDto = Utils.createCustomerRegisterDto();
@@ -54,18 +54,11 @@ public class CustomerServiceTest {
 
 
     @Test
-    public void getCustomerById_shouldBeSuccess() {
+    public void loadUserByUsernameTest() {
         when(adapter.loadUserByUsername("aref")).thenReturn(java.util.Optional.of(Utils.createCustomerDomain()));
         UserDetails result = customerService.loadUserByUsername("aref");
         Assert.assertNotNull(result);
     }
 
-
-    @Test
-    public void getCustomerById_shouldBeError_customerNotFound() {
-        CustomerDomain customer = Utils.createCustomerDomain();
-        expectedException.expect(CustomRuntimeException.class);
-        customerService.loadUserByUsername(customer.getId());
-    }
 
 }
