@@ -1,8 +1,6 @@
 package com.bookstore.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,7 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.math.BigDecimal;
 
 @Document(collection = "books")
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookEntity extends BaseEntity {

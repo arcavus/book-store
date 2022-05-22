@@ -22,8 +22,7 @@ public class StockAdapterImpl implements StockAdapter {
 
     private final StockRepository repository;
     private final StockEntityMapper mapper;
-    @Autowired
-    private RedisTemplate redisTemplate;
+    private final RedisTemplate redisTemplate;
 
     @Override
     public Optional<StockDomain> updateStockOfBook(StockDomain stockOfBook) {
@@ -39,20 +38,21 @@ public class StockAdapterImpl implements StockAdapter {
         } else {
             redisTemplate.opsForValue().set("lock", Boolean.TRUE);
         }
-        redisTemplate.opsForValue().set("lock", Boolean.FALSE);
         Optional<StockEntity> stockEntity = repository.findStockEntityByBookId(stockOfBook.getBookId());
+        redisTemplate.opsForValue().set("lock", Boolean.FALSE);
         if (!stockEntity.isPresent()) return Optional.empty();
 
-
-        stockEntity.get().setStock(stockOfBook.getStock());
-        repository.save(stockEntity.get());
-        return Optional.of(mapper.toDomainObject(stockEntity.get()));
+        StockEntity s = stockEntity.get();
+        s.setStock(stockOfBook.getStock());
+        repository.save(s);
+        return Optional.of(mapper.toDomainObject(s));
     }
 
     @Override
     public Optional<StockDomain> createStockOfBook(StockDomain stockOfBook) {
-        StockEntity entity = repository.save(mapper.toEntity(stockOfBook));
-        return Optional.of(mapper.toDomainObject(entity));
+        StockEntity stockEntity = mapper.toEntity(stockOfBook);
+        stockEntity= repository.save(stockEntity);
+        return Optional.of(mapper.toDomainObject(stockEntity));
     }
 
 

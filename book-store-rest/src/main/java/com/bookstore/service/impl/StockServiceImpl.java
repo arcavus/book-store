@@ -48,7 +48,10 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public ResponseWrapper<StockDto> getStockByBookId(String bookId) {
-        StockDto stocks = adapter.getStockOfBook(bookId).map(mapper::toDTO).get();
-        return ResponseUtil.buildSuccess(stocks);
+        Optional<StockDomain> stockOfBook = adapter.getStockOfBook(bookId);
+        Optional<StockDto> stockDto = stockOfBook.map(mapper::toDTO);
+        if (stockOfBook.isPresent() && stockDto.isPresent()) {
+            return ResponseUtil.buildSuccess(stockDto.get());
+        } else return ResponseUtil.buildError();
     }
 }

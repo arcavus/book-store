@@ -1,4 +1,4 @@
-package com.readingretailservices.service;
+package com.bookstore.service;
 
 import com.bookstore.adapter.CustomerAdapter;
 import com.bookstore.domain.CustomerDomain;
@@ -8,7 +8,7 @@ import com.bookstore.exception.CustomRuntimeException;
 import com.bookstore.mapper.CustomerDtoMapper;
 import com.bookstore.repository.CustomerRepository;
 import com.bookstore.service.impl.CustomerServiceImpl;
-import com.readingretailservices.utils.Utils;
+import com.bookstore.utils.Utils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

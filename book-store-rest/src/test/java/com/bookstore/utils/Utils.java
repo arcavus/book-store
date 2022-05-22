@@ -1,13 +1,10 @@
-package com.readingretailservices.utils;
+package com.bookstore.utils;
 
 import com.bookstore.domain.*;
 import com.bookstore.domain.CustomerRegisterDto;
 import com.bookstore.domain.OrderItemDto;
 import com.bookstore.domain.OrderBookResponse;
-import com.bookstore.entity.BookEntity;
-import com.bookstore.entity.CustomerEntity;
-import com.bookstore.entity.OrderBookEntity;
-import com.bookstore.entity.OrderEntity;
+import com.bookstore.entity.*;
 import com.bookstore.enums.OrderStatus;
 import org.assertj.core.util.Lists;
 
@@ -157,5 +154,20 @@ public class Utils {
 
     public static StockDto createStockDto() {
         return StockDto.builder().stock(2).bookId("2").build();
+    }
+    public static StockEntity createStockEntity(){
+        return StockEntity.builder().stock(2).bookId("2").id("1").build();
+    }
+
+    public static StatisticDomain createStaisticDomain() {
+        return StatisticDomain.builder().customerId("2").month(2).totalAmount(new BigDecimal("25")).totalOrder(4).totalPurchaseBookCount(4).build();
+        }
+
+    public static StatisticDto createStatisticDto() {
+        return StatisticDto.builder().customerId("2").month(2).totalAmount(new BigDecimal("25")).totalOrder(4).totalPurchaseBookCount(4).build();
+    }
+
+    public static CustomerDto createCustomerDto() {
+        return CustomerDto.builder().name("aref").password("2265123").surname("cavus").username("aserf").build();
     }
 }

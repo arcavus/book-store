@@ -1,4 +1,4 @@
-package com.readingretailservices.service;
+package com.bookstore.service;
 
 
 import com.bookstore.adapter.BookAdapter;
@@ -7,7 +7,7 @@ import com.bookstore.domain.BookDomain;
 import com.bookstore.domain.BookDto;
 import com.bookstore.mapper.BookDtoMapper;
 import com.bookstore.service.impl.BookServiceImpl;
-import com.readingretailservices.utils.Utils;
+import com.bookstore.utils.Utils;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Rule;

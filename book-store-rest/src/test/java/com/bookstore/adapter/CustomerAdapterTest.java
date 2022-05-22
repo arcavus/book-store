@@ -1,15 +1,12 @@
-package com.readingretailservices.adapter;
+package com.bookstore.adapter;
 
 
 import com.bookstore.adapter.impl.CustomerAdapterImpl;
-import com.bookstore.domain.BookDomain;
 import com.bookstore.domain.CustomerDomain;
-import com.bookstore.entity.BookEntity;
 import com.bookstore.entity.CustomerEntity;
-import com.bookstore.mapper.BookEntityMapper;
 import com.bookstore.mapper.CustomerEntityMapper;
 import com.bookstore.repository.CustomerRepository;
-import com.readingretailservices.utils.Utils;
+import com.bookstore.utils.Utils;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Rule;
