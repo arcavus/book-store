@@ -20,11 +20,7 @@ public interface OrderRepository extends MongoRepository<OrderEntity, String> {
 
     Page<OrderEntity> findOrderEntityByCreatedDateBetween(LocalDate from, LocalDate to, Pageable pageable);
 
-
-
-
     @Aggregation(pipeline = {
-//            "{ $match: { 'customerId' : ?0 } } ," +
                     "{ $group: {"
                         + " _id: { month: { $month: $createdDate } }, "
                         + " totalOrder: {$sum: 1},"

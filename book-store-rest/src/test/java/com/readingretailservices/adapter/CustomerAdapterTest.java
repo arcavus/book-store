@@ -38,7 +38,7 @@ public class CustomerAdapterTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void saveBookTest() {
+    public void saveCustomerTest() {
         CustomerDomain customerDomain = Utils.createCustomerDomain();
         when(mapper.toEntity(customerDomain)).thenReturn(Utils.createCustomer());
         when(customerRepository.save(any(CustomerEntity.class))).thenReturn(Utils.createCustomer());
@@ -47,7 +47,7 @@ public class CustomerAdapterTest {
     }
 
     @Test
-    public void getAllBooksTest() {
+    public void getAllcustomersTest() {
         when(customerRepository.findAll()).thenReturn(Lists.newArrayList(Utils.createCustomer()));
         when(mapper.toDomainObject(any(CustomerEntity.class))).thenReturn(Utils.createCustomerDomain());
         List<CustomerDomain> domainList = customerAdapter.getAllCustomers();
@@ -55,7 +55,7 @@ public class CustomerAdapterTest {
     }
 
     @Test
-    public void getBookByIdTest(){
+    public void getcustomerByNameTest(){
         when(customerRepository.findCustomerEntityByUsername("aref")).thenReturn(Optional.of(Utils.createCustomer()));
         when(mapper.toDomainObject(any(CustomerEntity.class))).thenReturn(Utils.createCustomerDomain());
         Optional<CustomerDomain> domain = customerAdapter.loadUserByUsername("aref");

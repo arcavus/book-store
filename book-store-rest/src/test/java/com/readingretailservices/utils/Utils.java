@@ -150,4 +150,12 @@ public class Utils {
     public static OrderItemDomain createOrderItemDomain(){
         return OrderItemDomain.builder().book(createBookDomain()).quantity(5).build();
     }
+
+    public static UpdateStockRequestDto createUpdateStockRequest() {
+        return UpdateStockRequestDto.builder().stock(5).bookId("2").build();
+    }
+
+    public static StockDto createStockDto() {
+        return StockDto.builder().stock(2).bookId("2").build();
+    }
 }
