@@ -23,8 +23,7 @@ is the first priority for their vision operations.
 - Swagger
 - Docker
 - Docker Compose
-- Redis(I think stock count race condition problem solved via Redis Lock Mechanism But I am not sure.
-Couchbase technology maybe more proper solution to race condition problem concurrent thread architecture. )
+- Redis(stock count race condition problem solved via Redis Lock Mechanism )
 
 ## COMPILE AND RUN
 
