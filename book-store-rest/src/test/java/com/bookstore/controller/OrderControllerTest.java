@@ -47,13 +47,14 @@ public class OrderControllerTest {
 
     @Test
     public void getCustomerOrdersTest() {
-        ResponseWrapper<OrderDto> dtoResponseWrapper = ResponseWrapper.<OrderDto>builder().data(Utils.createOrderDto()).success(true).build();
+        ResponseWrapper<List<OrderDto>> dtoResponseWrapper = ResponseWrapper.<List<OrderDto>>builder().data(Lists.newArrayList(Utils.createOrderDto())).success(true).build();
         final var principal = mock(Principal.class);
 
         final var userAuthentication = mock(Authentication.class);
-        when(orderService.getOrdersById("2")).thenReturn(dtoResponseWrapper);
-        ResponseEntity<ResponseWrapper<OrderDto>> ordersById = orderController.getOrdersById("2");
-        Assert.assertNotNull(Objects.requireNonNull(ordersById.getBody()).getData());
+        when(userAuthentication.getCredentials()).thenReturn("2");
+        when(orderService.getOrdersByCustomerId("2")).thenReturn(dtoResponseWrapper);
+        ResponseEntity<ResponseWrapper<List<OrderDto>>> ordersById = orderController.getCustomerOrders(userAuthentication);
+        Assert.assertEquals(1,Objects.requireNonNull(ordersById.getBody()).getData().size());
     }
     @Test
     public void getOrdersByCustomerIdTest(){

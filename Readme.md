@@ -4,12 +4,13 @@ deliver books from its one centralized warehouse to their customers within the s
 is the first priority for their vision operations.
 
 ## FEATURES
-    • Registering New Customer 
-    • Placing a new order
-    • Tracking the stock of books
-    • List all orders of the customer with Pagination
-    • Viewing the order details
-    • Query Monthly Statistics  
+    . Customer registration. Firstly You must to create user and get bareer token. 
+     This operation is customer registiration. 
+    • Order operation
+    • observing the stock of books
+    • List all of the customer's orders with Pagination
+    • Showing the order details
+    • Get Monthly Statistics  
 
 ## TOOLS
 - Java 11
@@ -31,16 +32,13 @@ Couchbase technology maybe more proper solution to race condition problem concur
 
 Requires **JDK11**, **Maven** and **Docker**.
 
-Before building the application especially for the integration tests, mongodb should be running first,
-That's why **in the beginning** you should run this command and run mongodb containers:
+Firstly mongo db docker run for the database connection. After you should run below docker command.
 
     > docker-compose up --build -d
 
 ## USAGE
 
-After compile & run the application successfully it can be tested from Postman.
-
-ReadingIsGood **Postman** Collection can be found under this directory:
+Ready Collection path for test functionalities of assignment: 
 
     /postman/Book Store.postman_collection.json
 
@@ -49,5 +47,12 @@ ReadingIsGood **Postman** Collection can be found under this directory:
 
 http://localhost:9090/swagger-ui.html
 
+There are root endpoint that:
+   ` > localhost:9090/api/v1/customers
+    > localhost:9090/api/v1/stocks
+    > localhost:9090/api/v1/orders
+    > localhost:9090/api/v1/books
+    > localhost:9090/api/v1/statistics
+`
 
 ![img.png](img.png)
