@@ -12,11 +12,15 @@ import com.bookstore.mapper.OrderDtoMapper;
 import com.bookstore.service.OrderService;
 import com.bookstore.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,14 +31,18 @@ public class OrderServiceImpl implements OrderService {
     private final BookAdapter bookAdapter;
     private final StockAdapter stockAdapter;
     private final OrderDtoMapper mapper;
+    private final StringRedisTemplate redisTemplate;
 
+
+    @TimeToLive
     @Override
     public ResponseWrapper<OrderDto> createOrder(String customerId, List<OrderItemDto> request) {
         if (request.isEmpty())
             throw new CustomRuntimeException(ErrorCodeEnum.FIELD_VALIDATION_ERROR);
 
         OrderDomain orderDomain = new OrderDomain(customerId);
-
+        //race condition prevent simultaneously decrease stock count
+        lock("stockCount");
         for (OrderItemDto order : request) {
             Optional<BookDomain> book = bookAdapter.getBookById(order.getBookId());
             book.orElseThrow(() -> new CustomRuntimeException(ErrorCodeEnum.CONTENT_NOT_FOUND));
@@ -51,6 +59,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         OrderDomain saveOrder = adapter.saveOrder(orderDomain);
+        unlock("stockCount");
         OrderDto orderDto = mapper.toDTO(saveOrder);
         return ResponseUtil.buildSuccess(orderDto);
     }
@@ -82,6 +91,32 @@ public class OrderServiceImpl implements OrderService {
                 .page(pageableOrder.getPage())
                 .list(mapper.toListDTO(pageableOrder.getList()))
                 .build();
+    }
+
+    private Boolean lock(String lockKey){
+        Long timeOut = redisTemplate.getExpire(lockKey);
+        SessionCallback<Boolean> sessionCallback = new SessionCallback<Boolean>() {
+            List<Object> exec = null;
+            @Override
+            @SuppressWarnings("unchecked")
+            public Boolean execute(RedisOperations operations) throws DataAccessException {
+                operations.multi();
+                operations.opsForValue().setIfAbsent(lockKey,"lock");
+                if(timeOut == null || timeOut == -2) {
+                    operations.expire(lockKey, 30, TimeUnit.MILLISECONDS);
+                }
+                exec = operations.exec();
+                if(exec.size() > 0) {
+                    return (Boolean) exec.get(0);
+                }
+                return false;
+            }
+        };
+        return redisTemplate.execute(sessionCallback);
+    }
+
+    private void unlock(String lockKey){
+        redisTemplate.delete(lockKey);
     }
 
 }
