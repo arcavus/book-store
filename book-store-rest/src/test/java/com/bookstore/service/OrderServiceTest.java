@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,12 +52,14 @@ public class OrderServiceTest {
 
     @Mock
     OrderRepository repository;
+    @Mock
+    StringRedisTemplate redisTemplate;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
 
-    @Test
+   @Test
     public void createOrderTest() {
         when(bookAdapter.getBookById("1")).thenReturn(Optional.of(Utils.createBookDomain()));
         when(stockAdapter.getStockOfBook("1")).thenReturn(Optional.of(Utils.createStockDomain()));

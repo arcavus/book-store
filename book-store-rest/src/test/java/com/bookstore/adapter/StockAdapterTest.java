@@ -13,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,16 +28,10 @@ public class StockAdapterTest {
     StockRepository repository;
     @Mock
     StockEntityMapper mapper;
-    @Mock
-    RedisTemplate redisTemplate;
-    @Mock
-    ValueOperations valueOperations;
+
 
     @Test
     public void updateStockOfBookTest(){
-        redisTemplate.multi();
-        when(redisTemplate.opsForValue()).thenReturn(valueOperations);
-        when(redisTemplate.opsForValue().get("lock")).thenReturn(Boolean.FALSE);
         when(repository.findStockEntityByBookId("5")).thenReturn(Optional.of(Utils.createStockEntity()));
         StockDomain stockDomain = Utils.createStockDomain();
         when(mapper.toDomainObject(any(StockEntity.class))).thenReturn(stockDomain);
